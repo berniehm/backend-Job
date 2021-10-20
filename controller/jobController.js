@@ -128,22 +128,22 @@ const jobController = () => {
                 return res.send({error:"documents is not availble"});
                }
 
-             res.set('Content-Type', 'Image/PNG');
+             res.set('Content-Type', 'application/pdf/cnd.openxmlformats-officedocument.spreadsheet.sheet');
                res.send(job.documents)
             
         },
 
         uploadDocument :async (req, res) => {
-            const buffer = await sharp(req.file.buffer).resize({width:250, height:250}).png().toBuffer();
+            //const buffer = await sharp(req.file.buffer).resize({width:250, height:250}).png().toBuffer();
             console.log(req.body.updoc)
-            console.log(buffer)
+            console.log(req.file.buffer)
             //req.user.avator = buffer;
             //await req.user.save();
             if(!req.file || !req.body.updoc){
                 return res.send({error : "please upload file or provide id"});
             }
 
-            const job  = await Job.findByIdAndUpdate(req.body.updoc, {documents : buffer}) ;
+            const job  = await Job.findByIdAndUpdate(req.body.updoc, {documents : req.file.buffer}) ;
             
             res.send(job);
         },

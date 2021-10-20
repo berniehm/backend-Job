@@ -6,8 +6,8 @@ const uploads = multer({
         fileSize: 10000000
     },              // allowed 10mb size 
     fileFilter(req, file, cb) {
-        if (! file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG)$/)) {
-            return cb(new Error('please upload appropriate format of image..'));
+        if (! file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|doc|docx|xlsx|pdf)$/)) {
+            return cb(new Error('please upload appropriate format of file..'));
         }
 
         cb(undefined, true);
