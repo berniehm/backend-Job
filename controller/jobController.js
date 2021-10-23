@@ -97,7 +97,7 @@ const jobController = () => {
    
               const {id, role} = await tokenController().verifyToken(token) ;
    
-              if(role !== "admin"){
+              if( !id){
                return  res.send({error: "You are prophited to update job .."})
              }else{
                 const job = await Job.findByIdAndUpdate(job_id, {
